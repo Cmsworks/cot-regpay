@@ -30,6 +30,12 @@ if($cfg['plugin']['regpay']['summ'] > 0)
 		{
 			cot_mail($urr['user_email'], $L['regpay_mail_subject'], sprintf($L['regpay_mail_body'], $urr['user_name']));
 			cot_log("Payment for register");
+			/* === Hook === */
+	                foreach (cot_getextplugins('regpay.done') as $pl)
+	                {
+		            include $pl;
+	                }
+	                /* ===== */
 		}
 	}
 }
